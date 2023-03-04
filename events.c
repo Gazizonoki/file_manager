@@ -233,10 +233,8 @@ void go_to_directory(void) {
     if (current_line == 0) {
         return;
     }
-    FILE *file = fopen("log.txt", "w+");
     struct dirent *entry = get_cur_entry();
     if (entry->d_type == DT_DIR) {
-        fprintf(file, "%s\n", entry->d_name);
         if (access(entry->d_name, R_OK) != 0) {
             close_cur_dir();
             return;
@@ -247,9 +245,7 @@ void go_to_directory(void) {
         }
         start_line = 1;
         current_line = 0;
-        fprintf(file, "here\n");
     }
-    fclose(file);
     close_cur_dir();
 }
 
